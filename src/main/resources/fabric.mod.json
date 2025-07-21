@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "id": "shieldindicator",
+  "version": "${version}",
+  "name": "ShieldIndicator",
+  "description": "Minecraft Fabric mod that display icon when using the shield or shield be disabled",
+  "authors": "Lavainmc",
+  "contact": {
+    "repo": "https://github.com/Lavainmc/ShieldIndicator"
+  },
+  "license": "MIT",
+  "icon": "assets/shieldindicator/icon.png",
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "me.lavainmc.shieldindicator.client.ShieldIndicatorClient"
+    ],
+    "main": [
+      "me.lavainmc.shieldindicator.ShieldIndicator"
+    ]
+  },
+  "mixins": [
+    "shieldindicator.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric": "*",
+    "minecraft": "${minecraft_version}"
+  }
+}
