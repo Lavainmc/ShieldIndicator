@@ -1,4 +1,4 @@
 # ShieldIndicator
 Minecraft Fabric mod that display icon when using the shield or shield be disabled
 
-(someone can help me update this mod?)
+(can someone help me update this mod?)
