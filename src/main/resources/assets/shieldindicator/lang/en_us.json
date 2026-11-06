@@ -2,6 +2,11 @@
   "title.shieldindicator.config": "Shield Indicator Configuration",
   "category.shieldindicator.general": "General Setting",
   "option.shieldindicator.show_indicator": "Show Indicator",
+  "option.shieldindicator.mode": "Indicator Mode",
+  "option.shieldindicator.mode.crosshair": "Crosshair",
+  "option.shieldindicator.mode.hotbar": "Hotbar",
   "option.shieldindicator.enable_blend": "Enable Blend Effect",
-  "option.shieldindicator.y_offset": "Y Offset from Crosshair"
+  "option.shieldindicator.y_offset": "Crosshair Y Offset",
+  "option.shieldindicator.hotbar_x_offset": "Hotbar X Offset",
+  "option.shieldindicator.hotbar_y_offset": "Hotbar Y Offset"
 }

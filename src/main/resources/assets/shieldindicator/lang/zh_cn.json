@@ -2,6 +2,11 @@
   "title.shieldindicator.config": "盾牌指示器 配置",
   "category.shieldindicator.general": "总设置",
   "option.shieldindicator.show_indicator": "启用指示器",
+  "option.shieldindicator.mode": "指示器模式",
+  "option.shieldindicator.mode.crosshair": "准星",
+  "option.shieldindicator.mode.hotbar": "快捷栏",
   "option.shieldindicator.enable_blend": "启用指示器混淆效果",
-  "option.shieldindicator.y_offset": "图标Y轴位置"
+  "option.shieldindicator.y_offset": "准星 Y 偏移",
+  "option.shieldindicator.hotbar_x_offset": "快捷栏 X 偏移",
+  "option.shieldindicator.hotbar_y_offset": "快捷栏 Y 偏移"
 }
