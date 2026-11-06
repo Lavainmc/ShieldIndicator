@@ -44,8 +44,8 @@ public class HudRenderManager {
         if (config.mode == IndicatorMode.HOTBAR) {
             // Right side of the hotbar, aligned with the 20x20 hotbar slot area
             // (same anchor as the vanilla hotbar attack indicator).
-            x = centerX + 91 + 6 + config.hotbarXOffset;
-            y = client.getWindow().getScaledHeight() - 21 + config.hotbarYOffset;
+            x = centerX + 120 + config.hotbarXOffset;
+            y = client.getWindow().getScaledHeight() - 25 + config.hotbarYOffset;
         } else {
             // Below the crosshair.
             x = centerX - 8;

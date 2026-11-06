@@ -3,7 +3,7 @@
   "category.shieldindicator.general": "总设置",
   "option.shieldindicator.show_indicator": "启用指示器",
   "option.shieldindicator.mode": "指示器模式",
-  "option.shieldindicator.mode.crosshair": "准星",
+  "option.shieldindicator.mode.crosshair": "十字准星",
   "option.shieldindicator.mode.hotbar": "快捷栏",
   "option.shieldindicator.enable_blend": "准星混淆效果",
   "option.shieldindicator.y_offset": "准星 Y 偏移",
