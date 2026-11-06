@@ -1,0 +1,7 @@
+{
+  "title.shieldindicator.config": "盾牌指示器 配置",
+  "category.shieldindicator.general": "总设置",
+  "option.shieldindicator.show_indicator": "启用指示器",
+  "option.shieldindicator.enable_blend": "启用指示器混淆效果",
+  "option.shieldindicator.y_offset": "图标Y轴位置"
+}
