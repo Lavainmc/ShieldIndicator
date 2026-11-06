@@ -17,8 +17,8 @@ public class HudRenderManager {
     private static final Identifier SHIELD_INDICATOR_BLOCKING = Identifier.of("shieldindicator", "textures/gui/shield_indicator_blocking.png");
     private static final Identifier SHIELD_INDICATOR_DISABLED = Identifier.of("shieldindicator", "textures/gui/shield_indicator_disabled.png");
 
-    // Optional hotbar-mode artwork: 16x16 PNGs. Until they are added, the
-    // crosshair textures above are used as a fallback.
+    // Hotbar-mode artwork: 20x20 PNGs, drawn with normal alpha blending
+    // instead of the crosshair blend effect.
     private static final Identifier SHIELD_INDICATOR_HOTBAR_BLOCKING = Identifier.of("shieldindicator", "textures/gui/shield_indicator_hotbar_blocking.png");
     private static final Identifier SHIELD_INDICATOR_HOTBAR_DISABLED = Identifier.of("shieldindicator", "textures/gui/shield_indicator_hotbar_disabled.png");
 
@@ -42,26 +42,25 @@ public class HudRenderManager {
         int x;
         int y;
         if (config.mode == IndicatorMode.HOTBAR) {
-            // Right side of the hotbar, vertically aligned with the hotbar slots
+            // Right side of the hotbar, aligned with the 20x20 hotbar slot area
             // (same anchor as the vanilla hotbar attack indicator).
             x = centerX + 91 + 6 + config.hotbarXOffset;
-            y = client.getWindow().getScaledHeight() - 19 + config.hotbarYOffset;
+            y = client.getWindow().getScaledHeight() - 21 + config.hotbarYOffset;
         } else {
             // Below the crosshair.
             x = centerX - 8;
             y = centerY + config.yOffset;
         }
 
-        Identifier blockingTexture = config.mode == IndicatorMode.HOTBAR
-                ? textureOrFallback(SHIELD_INDICATOR_HOTBAR_BLOCKING, SHIELD_INDICATOR_BLOCKING)
-                : SHIELD_INDICATOR_BLOCKING;
-        Identifier disabledTexture = config.mode == IndicatorMode.HOTBAR
-                ? textureOrFallback(SHIELD_INDICATOR_HOTBAR_DISABLED, SHIELD_INDICATOR_DISABLED)
-                : SHIELD_INDICATOR_DISABLED;
+        boolean hotbar = config.mode == IndicatorMode.HOTBAR;
+        int size = hotbar ? 20 : 16;
+        Identifier blockingTexture = hotbar ? SHIELD_INDICATOR_HOTBAR_BLOCKING : SHIELD_INDICATOR_BLOCKING;
+        Identifier disabledTexture = hotbar ? SHIELD_INDICATOR_HOTBAR_DISABLED : SHIELD_INDICATOR_DISABLED;
 
-        // effect render
+        // The crosshair icon uses the invert blend effect; the hotbar icon is
+        // rendered with normal alpha blending, like the vanilla attack indicator.
         RenderSystem.enableBlend();
-        if (config.enableBlend) {
+        if (!hotbar && config.enableBlend) {
             RenderSystem.blendFuncSeparate(GlStateManager.SrcFactor.ONE_MINUS_DST_COLOR, GlStateManager.DstFactor.ONE_MINUS_SRC_COLOR, GlStateManager.SrcFactor.ONE, GlStateManager.DstFactor.ZERO);
         } else {
             RenderSystem.defaultBlendFunc();
@@ -69,21 +68,15 @@ public class HudRenderManager {
 
         // shield blocking
         if (blocking) {
-            context.drawTexture(blockingTexture, x, y, 0, 0, 16, 16, 16, 16);
+            context.drawTexture(blockingTexture, x, y, 0, 0, size, size, size, size);
         }
 
         // shield disabled (冷却中)
         if (disabled) {
-            context.drawTexture(disabledTexture, x, y, 0, 0, 16, 16, 16, 16);
+            context.drawTexture(disabledTexture, x, y, 0, 0, size, size, size, size);
         }
 
         RenderSystem.defaultBlendFunc();
         RenderSystem.disableBlend();
-    }
-
-    private static Identifier textureOrFallback(Identifier preferred, Identifier fallback) {
-        return MinecraftClient.getInstance().getResourceManager().getResource(preferred).isPresent()
-                ? preferred
-                : fallback;
     }
 }
