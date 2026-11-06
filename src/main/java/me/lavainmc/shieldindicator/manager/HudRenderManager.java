@@ -3,11 +3,12 @@ package me.lavainmc.shieldindicator.manager;
 import me.lavainmc.shieldindicator.config.IndicatorMode;
 import me.lavainmc.shieldindicator.config.ModConfig;
 
-import com.mojang.blaze3d.platform.GlStateManager;
-import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.pipeline.RenderPipeline;
 
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.gl.RenderPipelines;
 import net.minecraft.client.gui.DrawContext;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.util.Identifier;
 
@@ -31,7 +32,7 @@ public class HudRenderManager {
         }
 
         boolean blocking = client.player.isBlocking();
-        boolean disabled = client.player.getItemCooldownManager().isCoolingDown(Items.SHIELD);
+        boolean disabled = client.player.getItemCooldownManager().isCoolingDown(new ItemStack(Items.SHIELD));
         if (!blocking && !disabled) {
             return;
         }
@@ -57,26 +58,20 @@ public class HudRenderManager {
         Identifier blockingTexture = hotbar ? SHIELD_INDICATOR_HOTBAR_BLOCKING : SHIELD_INDICATOR_BLOCKING;
         Identifier disabledTexture = hotbar ? SHIELD_INDICATOR_HOTBAR_DISABLED : SHIELD_INDICATOR_DISABLED;
 
-        // The crosshair icon uses the invert blend effect; the hotbar icon is
-        // rendered with normal alpha blending, like the vanilla attack indicator.
-        RenderSystem.enableBlend();
-        if (!hotbar && config.enableBlend) {
-            RenderSystem.blendFuncSeparate(GlStateManager.SrcFactor.ONE_MINUS_DST_COLOR, GlStateManager.DstFactor.ONE_MINUS_SRC_COLOR, GlStateManager.SrcFactor.ONE, GlStateManager.DstFactor.ZERO);
-        } else {
-            RenderSystem.defaultBlendFunc();
-        }
+        // The crosshair icon uses the invert pipeline; the hotbar icon always
+        // uses the normal GUI alpha pipeline, like the vanilla attack indicator.
+        RenderPipeline pipeline = !hotbar && config.enableBlend
+                ? RenderPipelines.GUI_INVERT
+                : RenderPipelines.GUI_TEXTURED;
 
         // shield blocking
         if (blocking) {
-            context.drawTexture(blockingTexture, x, y, 0, 0, size, size, size, size);
+            context.drawTexture(pipeline, blockingTexture, x, y, 0, 0, size, size, size, size);
         }
 
         // shield disabled (冷却中)
         if (disabled) {
-            context.drawTexture(disabledTexture, x, y, 0, 0, size, size, size, size);
+            context.drawTexture(pipeline, disabledTexture, x, y, 0, 0, size, size, size, size);
         }
-
-        RenderSystem.defaultBlendFunc();
-        RenderSystem.disableBlend();
     }
 }
