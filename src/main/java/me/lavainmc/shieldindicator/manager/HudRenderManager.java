@@ -24,11 +24,6 @@ public class HudRenderManager {
             return;
         }
 
-        // The indicator belongs to the crosshair, so only draw it in first person.
-        if (!client.options.getPerspective().isFirstPerson()) {
-            return;
-        }
-
         boolean blocking = client.player.isBlocking();
         boolean disabled = client.player.getItemCooldownManager().isCoolingDown(Items.SHIELD);
         if (!blocking && !disabled) {
