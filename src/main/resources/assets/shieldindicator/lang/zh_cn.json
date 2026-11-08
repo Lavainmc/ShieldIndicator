@@ -5,7 +5,7 @@
   "option.shieldindicator.mode": "指示器模式",
   "option.shieldindicator.mode.crosshair": "十字准星",
   "option.shieldindicator.mode.hotbar": "快捷栏",
-  "option.shieldindicator.enable_blend": "准星混淆效果",
+  "option.shieldindicator.enable_blend": "混淆效果",
   "option.shieldindicator.y_offset": "准星 Y 偏移",
   "option.shieldindicator.hotbar_x_offset": "快捷栏 X 偏移",
   "option.shieldindicator.hotbar_y_offset": "快捷栏 Y 偏移"
