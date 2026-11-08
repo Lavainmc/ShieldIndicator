@@ -26,5 +26,9 @@
     "fabricloader": ">=${loader_version}",
     "fabric": "*",
     "minecraft": "${minecraft_version}"
+  },
+  "recommends": {
+    "cloth-config": "*",
+    "modmenu": "*"
   }
 }

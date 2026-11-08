@@ -2,7 +2,8 @@ package me.lavainmc.shieldindicator.client;
 
 import com.terraformersmc.modmenu.api.ConfigScreenFactory;
 import com.terraformersmc.modmenu.api.ModMenuApi;
-import me.lavainmc.shieldindicator.config.ModConfig;
+import me.lavainmc.shieldindicator.ShieldIndicator;
+import me.lavainmc.shieldindicator.config.ModConfigScreen;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 
@@ -15,7 +16,13 @@ public class ModMenuIntegration implements ModMenuApi {
    // ModMenuApi
    public ConfigScreenFactory<?> getModConfigScreenFactory() {
       return (parent) -> {
-         return ModConfig.createConfigScreen(parent);
+         try {
+            return ModConfigScreen.create(parent);
+         } catch (LinkageError e) {
+            // Cloth Config is optional; never take the game down if it is missing.
+            ShieldIndicator.LOGGER.warn("Cloth Config is missing; cannot open the ShieldIndicator config screen", e);
+            return parent;
+         }
       };
    }
 }
