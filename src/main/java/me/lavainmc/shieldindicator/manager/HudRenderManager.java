@@ -18,8 +18,6 @@ public class HudRenderManager {
     private static final Identifier SHIELD_INDICATOR_BLOCKING = Identifier.of("shieldindicator", "textures/gui/shield_indicator_blocking.png");
     private static final Identifier SHIELD_INDICATOR_DISABLED = Identifier.of("shieldindicator", "textures/gui/shield_indicator_disabled.png");
 
-    // Hotbar-mode artwork: 20x20 PNGs, drawn with normal alpha blending
-    // instead of the crosshair blend effect.
     private static final Identifier SHIELD_INDICATOR_HOTBAR_BLOCKING = Identifier.of("shieldindicator", "textures/gui/shield_indicator_hotbar_blocking.png");
     private static final Identifier SHIELD_INDICATOR_HOTBAR_DISABLED = Identifier.of("shieldindicator", "textures/gui/shield_indicator_hotbar_disabled.png");
 
@@ -43,10 +41,8 @@ public class HudRenderManager {
         int x;
         int y;
         if (config.mode == IndicatorMode.HOTBAR) {
-            // Right side of the hotbar, aligned with the 20x20 hotbar slot area
-            // (same anchor as the vanilla hotbar attack indicator).
-            x = centerX + 110 + config.hotbarXOffset;
-            y = client.getWindow().getScaledHeight() - 23 + config.hotbarYOffset;
+            x = centerX + 120 + config.hotbarXOffset;
+            y = client.getWindow().getScaledHeight() - 22 + config.hotbarYOffset;
         } else {
             // Below the crosshair.
             x = centerX - 8;
@@ -58,10 +54,10 @@ public class HudRenderManager {
         Identifier blockingTexture = hotbar ? SHIELD_INDICATOR_HOTBAR_BLOCKING : SHIELD_INDICATOR_BLOCKING;
         Identifier disabledTexture = hotbar ? SHIELD_INDICATOR_HOTBAR_DISABLED : SHIELD_INDICATOR_DISABLED;
 
-        // The crosshair icon uses the invert pipeline; the hotbar icon always
-        // uses the normal GUI alpha pipeline, like the vanilla attack indicator.
+        // The crosshair icon uses the textured invert pipeline (the one vanilla
+        // uses for the crosshair); the hotbar icon uses normal GUI alpha.
         RenderPipeline pipeline = !hotbar && config.enableBlend
-                ? RenderPipelines.GUI_INVERT
+                ? RenderPipelines.CROSSHAIR
                 : RenderPipelines.GUI_TEXTURED;
 
         // shield blocking
