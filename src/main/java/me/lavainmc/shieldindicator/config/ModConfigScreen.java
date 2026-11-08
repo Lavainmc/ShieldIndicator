@@ -44,6 +44,11 @@ public class ModConfigScreen {
                 .setSaveConsumer(newValue -> config.yOffset = newValue)
                 .build());
 
+        general.addEntry(entryBuilder.startBooleanToggle(Text.translatable("option.shieldindicator.crosshair_third_person"), config.showCrosshairInThirdPerson)
+                .setDefaultValue(true)
+                .setSaveConsumer(newValue -> config.showCrosshairInThirdPerson = newValue)
+                .build());
+
         general.addEntry(entryBuilder.startIntSlider(Text.translatable("option.shieldindicator.hotbar_x_offset"), config.hotbarXOffset, -100, 100)
                 .setDefaultValue(0)
                 .setSaveConsumer(newValue -> config.hotbarXOffset = newValue)

@@ -13,6 +13,7 @@ public class ModConfig {
     public boolean showIndicator = true;
     public IndicatorMode mode = IndicatorMode.CROSSHAIR;
     public boolean enableBlend = true;
+    public boolean showCrosshairInThirdPerson = true;
     public int yOffset = 20;
     public int hotbarXOffset = 0;
     public int hotbarYOffset = 0;
