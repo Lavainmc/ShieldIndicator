@@ -29,6 +29,13 @@ public class HudRenderManager {
             return;
         }
 
+        // The crosshair indicator is first-person only unless the user opts in.
+        if (config.mode == IndicatorMode.CROSSHAIR
+                && !client.options.getPerspective().isFirstPerson()
+                && !config.showCrosshairInThirdPerson) {
+            return;
+        }
+
         boolean blocking = client.player.isBlocking();
         boolean disabled = client.player.getItemCooldownManager().isCoolingDown(new ItemStack(Items.SHIELD));
         if (!blocking && !disabled) {

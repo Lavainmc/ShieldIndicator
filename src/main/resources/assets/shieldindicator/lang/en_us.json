@@ -5,8 +5,9 @@
   "option.shieldindicator.mode": "Indicator Mode",
   "option.shieldindicator.mode.crosshair": "Crosshair",
   "option.shieldindicator.mode.hotbar": "Hotbar",
-  "option.shieldindicator.enable_blend": "Blend Effect",
+  "option.shieldindicator.crosshair_enable_blend": "Blend Effect On Crosshair Indicator ",
   "option.shieldindicator.y_offset": "Crosshair Y Offset",
+  "option.shieldindicator.crosshair_third_person": "Show Crosshair Indicator In Third Person",
   "option.shieldindicator.hotbar_x_offset": "Hotbar X Offset",
   "option.shieldindicator.hotbar_y_offset": "Hotbar Y Offset"
 }

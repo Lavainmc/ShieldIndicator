@@ -34,7 +34,12 @@ public class ModConfigScreen {
                         "option.shieldindicator.mode." + value.name().toLowerCase(Locale.ROOT)))
                 .build());
 
-        general.addEntry(entryBuilder.startBooleanToggle(Text.translatable("option.shieldindicator.enable_blend"), config.enableBlend)
+        general.addEntry(entryBuilder.startBooleanToggle(Text.translatable("option.shieldindicator.crosshair_third_person"), config.showCrosshairInThirdPerson)
+                .setDefaultValue(true)
+                .setSaveConsumer(newValue -> config.showCrosshairInThirdPerson = newValue)
+                .build());
+
+        general.addEntry(entryBuilder.startBooleanToggle(Text.translatable("option.shieldindicator.crosshair_enable_blend"), config.enableBlend)
                 .setDefaultValue(true)
                 .setSaveConsumer(newValue -> config.enableBlend = newValue)
                 .build());
@@ -42,6 +47,11 @@ public class ModConfigScreen {
         general.addEntry(entryBuilder.startIntSlider(Text.translatable("option.shieldindicator.y_offset"), config.yOffset, -60, 100)
                 .setDefaultValue(20)
                 .setSaveConsumer(newValue -> config.yOffset = newValue)
+                .build());
+
+        general.addEntry(entryBuilder.startBooleanToggle(Text.translatable("option.shieldindicator.crosshair_third_person"), config.showCrosshairInThirdPerson)
+                .setDefaultValue(true)
+                .setSaveConsumer(newValue -> config.showCrosshairInThirdPerson = newValue)
                 .build());
 
         general.addEntry(entryBuilder.startIntSlider(Text.translatable("option.shieldindicator.hotbar_x_offset"), config.hotbarXOffset, -100, 100)
